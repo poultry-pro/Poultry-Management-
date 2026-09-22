@@ -1,50 +1,245 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Poultry RC Manager</title>
+
+<title>PoultryPro | Smart Poultry Farm Management</title>
 
 <style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
 body{
-font-family:Arial;
-background:#f4f7f5;
-margin:0;
+  font-family:Arial,sans-serif;
+  background:#faf8f1;
+  color:#14231b;
 }
+
 header{
-background:#16803c;
-color:white;
-padding:25px;
-text-align:center;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:18px 7%;
+  background:#faf8f1;
+  border-bottom:1px solid #eee8d9;
 }
-.container{
-padding:20px;
-max-width:600px;
-margin:auto;
+
+.logo{
+  font-size:22px;
+  font-weight:bold;
+  color:#174b32;
 }
+
+.logo span{
+  color:#e8a928;
+}
+
+.header-btn{
+  background:#174b32;
+  color:white;
+  border:0;
+  padding:13px 20px;
+  border-radius:25px;
+  font-weight:bold;
+}
+
+.hero{
+  max-width:1100px;
+  margin:auto;
+  padding:75px 7% 45px;
+}
+
+.badge{
+  display:inline-block;
+  padding:9px 15px;
+  border:1px solid #e7ddc8;
+  border-radius:25px;
+  background:#fffaf0;
+  color:#4c554e;
+  font-size:14px;
+  margin-bottom:25px;
+}
+
+h1{
+  font-family:Georgia,serif;
+  font-size:52px;
+  line-height:1.08;
+  max-width:750px;
+  margin-bottom:25px;
+}
+
+.hero p{
+  color:#657069;
+  font-size:18px;
+  line-height:1.7;
+  max-width:700px;
+}
+
+.buttons{
+  margin-top:30px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+}
+
+.btn{
+  padding:15px 22px;
+  border-radius:30px;
+  border:1px solid #ddd8ca;
+  background:white;
+  font-size:15px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.btn-main{
+  background:#174b32;
+  color:white;
+  border:none;
+}
+
+.btn-gold{
+  background:#f1b52b;
+  color:#18251d;
+  border:none;
+}
+
+.features{
+  max-width:1100px;
+  margin:auto;
+  padding:25px 7% 60px;
+}
+
+.features h2{
+  font-family:Georgia,serif;
+  font-size:32px;
+  margin-bottom:25px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:16px;
+}
+
 .card{
-background:white;
-padding:20px;
-margin-bottom:15px;
-border-radius:12px;
+  background:white;
+  padding:25px;
+  border-radius:18px;
+  border:1px solid #eee8dc;
+  box-shadow:0 5px 20px rgba(0,0,0,.04);
 }
-h2{
-color:#16803c;
+
+.icon{
+  font-size:28px;
+  margin-bottom:15px;
 }
-input{
-width:100%;
-padding:12px;
-margin:8px 0 15px;
-box-sizing:border-box;
+
+.card h3{
+  margin-bottom:8px;
+  color:#174b32;
 }
-button{
-width:100%;
-padding:14px;
-background:#16803c;
-color:white;
-border:0;
-border-radius:8px;
-font-size:16px;
+
+.card p{
+  color:#707870;
+  line-height:1.5;
+  font-size:14px;
+}
+
+.dashboard{
+  max-width:1100px;
+  margin:0 auto 60px;
+  padding:0 7%;
+}
+
+.dashboard-box{
+  background:#174b32;
+  color:white;
+  border-radius:25px;
+  padding:30px;
+}
+
+.dashboard-box h2{
+  font-family:Georgia,serif;
+  font-size:30px;
+  margin-bottom:20px;
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+}
+
+.stat{
+  background:rgba(255,255,255,.1);
+  padding:20px;
+  border-radius:15px;
+}
+
+.stat small{
+  color:#cbd9d0;
+}
+
+.stat strong{
+  display:block;
+  font-size:25px;
+  margin-top:7px;
+}
+
+footer{
+  text-align:center;
+  padding:30px;
+  color:#777;
+  border-top:1px solid #eee8d9;
+}
+
+@media(max-width:700px){
+
+  header{
+    padding:16px 20px;
+  }
+
+  .logo{
+    font-size:20px;
+  }
+
+  .header-btn{
+    padding:11px 14px;
+    font-size:12px;
+  }
+
+  .hero{
+    padding:55px 20px 35px;
+  }
+
+  h1{
+    font-size:40px;
+  }
+
+  .hero p{
+    font-size:16px;
+  }
+
+  .features{
+    padding:20px;
+  }
+
+  .grid{
+    grid-template-columns:1fr;
+  }
+
+  .dashboard{
+    padding:0 20px;
+  }
+
+  .stats{
+    grid-template-columns:repeat(2,1fr);
+  }
 }
 </style>
 </head>
@@ -52,99 +247,159 @@ font-size:16px;
 <body>
 
 <header>
-<h1>🐔 Poultry RC Manager</h1>
-<p>Batch & Rearing Charges</p>
+  <div class="logo">🐔 Poultry<span>Pro</span></div>
+  <button class="header-btn" onclick="startFarm()">
+    Create Farm Account →
+  </button>
 </header>
 
-<div class="container">
+<section class="hero">
 
-<div class="card">
-<h2>📋 Create New RC</h2>
+  <div class="badge">✨ Capture · Understand · Improve</div>
 
-<label>Farmer Name</label>
-<input type="text" placeholder="Enter farmer name">
+  <h1>
+    Run your poultry farm with clarity, control and confidence.
+  </h1>
 
-<label>Company / Hatchery</label>
-<input type="text" placeholder="Enter company">
+  <p>
+    PoultryPro brings batch management, feed, mortality, health,
+    sales and rearing charges into one simple platform —
+    helping poultry farmers understand their farm performance.
+  </p>
 
-<label>Batch Number</label>
-<input type="text" placeholder="Enter batch number">
+  <div class="buttons">
+    <button class="btn btn-main" onclick="startFarm()">
+      Explore Dashboard →
+    </button>
 
-<label>Chicks Housed</label>
-<input type="number" placeholder="Enter chicks">
+    <button class="btn btn-gold" onclick="newBatch()">
+      🚀 Create New Batch
+    </button>
 
-<label>Mortality</label>
-<input type="number" placeholder="Enter mortality">
+    <button class="btn" onclick="showMessage('Tutorials coming soon')">
+      🎓 Explore Tutorials
+    </button>
+  </div>
 
-<label>Birds Sold</label>
-<input type="number" placeholder="Enter birds sold">
-  <label>Live Weight (KG)</label>
-<input type="number" placeholder="Enter live weight">
+</section>
 
-<label>Feed Consumption (KG)</label>
-<input type="number" placeholder="Enter feed consumption">
+<section class="features">
 
-<label>Chick Cost (₹)</label>
-<input type="number" placeholder="Enter chick cost">
+  <h2>Everything your farm needs</h2>
 
-<label>Feed Cost (₹)</label>
-<input type="number" placeholder="Enter feed cost">
+  <div class="grid">
 
-<label>Medicine Cost (₹)</label>
-<input type="number" placeholder="Enter medicine cost">
+    <div class="card">
+      <div class="icon">🐔</div>
+      <h3>Batch Management</h3>
+      <p>
+        Manage chicks, placement, mortality and birds sold
+        batch by batch.
+      </p>
+    </div>
 
-<label>Vaccine Cost (₹)</label>
-<input type="number" placeholder="Enter vaccine cost">
+    <div class="card">
+      <div class="icon">🌾</div>
+      <h3>Feed Tracking</h3>
+      <p>
+        Record feed consumption and understand your FCR
+        and feed cost.
+      </p>
+    </div>
 
-<label>Overhead / Other Cost (₹)</label>
-<input type="number" placeholder="Enter other cost">
+    <div class="card">
+      <div class="icon">💉</div>
+      <h3>Health & Vaccines</h3>
+      <p>
+        Keep medicine and vaccination expenses organised
+        for every batch.
+      </p>
+    </div>
 
-<button onclick="calculateRC()">📊 Calculate RC</button>
+    <div class="card">
+      <div class="icon">📉</div>
+      <h3>Mortality</h3>
+      <p>
+        Track mortality percentage and monitor batch
+        performance.
+      </p>
+    </div>
 
-</div>
+    <div class="card">
+      <div class="icon">💰</div>
+      <h3>Rearing Charges</h3>
+      <p>
+        Calculate production cost and understand your
+        rearing charges.
+      </p>
+    </div>
 
-</div>
+    <div class="card">
+      <div class="icon">📊</div>
+      <h3>Farm Insights</h3>
+      <p>
+        See important numbers like FCR, cost per KG
+        and batch performance.
+      </p>
+    </div>
 
-</body><script>
-function calculateRC(){
+  </div>
 
-  const inputs = document.querySelectorAll("input");
+</section>
 
-  const chicks = Number(inputs[3].value) || 0;
-  const mortality = Number(inputs[4].value) || 0;
-  const birdsSold = Number(inputs[5].value) || 0;
-  const liveWeight = Number(inputs[6].value) || 0;
-  const feed = Number(inputs[7].value) || 0;
-  const chickCost = Number(inputs[8].value) || 0;
-  const feedCost = Number(inputs[9].value) || 0;
-  const medicine = Number(inputs[10].value) || 0;
-  const vaccine = Number(inputs[11].value) || 0;
-  const otherCost = Number(inputs[12].value) || 0;
+<section class="dashboard">
 
-  const mortalityPercent =
-    chicks > 0 ? (mortality / chicks) * 100 : 0;
+  <div class="dashboard-box">
 
-  const liveBirds = chicks - mortality;
+    <h2>Farm performance at a glance</h2>
 
-  const fcr =
-    liveWeight > 0 ? feed / liveWeight : 0;
+    <div class="stats">
 
-  const totalCost =
-    chickCost + feedCost + medicine + vaccine + otherCost;
+      <div class="stat">
+        <small>Live Birds</small>
+        <strong>—</strong>
+      </div>
 
-  const costPerKg =
-    liveWeight > 0 ? totalCost / liveWeight : 0;
+      <div class="stat">
+        <small>Mortality</small>
+        <strong>—</strong>
+      </div>
 
-  document.getElementById("result").innerHTML = `
-    <h2>📊 Batch Result</h2>
-    <p><b>Live Birds:</b> ${liveBirds}</p>
-    <p><b>Mortality:</b> ${mortalityPercent.toFixed(2)}%</p>
-    <p><b>FCR:</b> ${fcr.toFixed(3)}</p>
-    <p><b>Total Production Cost:</b> ₹${totalCost.toFixed(2)}</p>
-    <p><b>Production Cost / KG:</b> ₹${costPerKg.toFixed(2)}</p>
-  `;
+      <div class="stat">
+        <small>FCR</small>
+        <strong>—</strong>
+      </div>
 
-  document.getElementById("result").style.display = "block";
+      <div class="stat">
+        <small>Cost / KG</small>
+        <strong>—</strong>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<footer>
+  PoultryPro © 2026 · Smart Poultry Farm Management
+</footer>
+
+<script>
+
+function startFarm(){
+  alert("Farm Account & Dashboard coming next.");
 }
+
+function newBatch(){
+  alert("New Batch setup coming next.");
+}
+
+function showMessage(message){
+  alert(message);
+}
+
 </script>
+
+</body>
 </html>
