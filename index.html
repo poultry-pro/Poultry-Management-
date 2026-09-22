@@ -1,64 +1,89 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Poultry RC Manager</title>
 
 <style>
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-  font-family:Arial,sans-serif;
-}
-
 body{
-  background:#f4f7f5;
-  color:#222;
+font-family:Arial;
+background:#f4f7f5;
+margin:0;
 }
-
 header{
-  background:#16803c;
-  color:white;
-  padding:28px 20px;
-  text-align:center;
+background:#16803c;
+color:white;
+padding:25px;
+text-align:center;
 }
-
-header h1{
-  font-size:26px;
-  margin-bottom:8px;
-}
-
 .container{
-  max-width:700px;
-  margin:auto;
-  padding:20px;
+padding:20px;
+max-width:600px;
+margin:auto;
 }
-
 .card{
-  background:white;
-  padding:20px;
-  margin-bottom:18px;
-  border-radius:14px;
-  box-shadow:0 2px 10px rgba(0,0,0,0.08);
+background:white;
+padding:20px;
+margin-bottom:15px;
+border-radius:12px;
 }
-
-.card h2{
-  color:#16803c;
-  margin-bottom:18px;
-  font-size:20px;
+h2{
+color:#16803c;
 }
-
-label{
-  display:block;
-  margin-top:14px;
-  margin-bottom:6px;
-  font-weight:bold;
-}
-
 input{
-  width:100%;
-  padding:13px;
-  border:1px solid #ccc
+width:100%;
+padding:12px;
+margin:8px 0 15px;
+box-sizing:border-box;
+}
+button{
+width:100%;
+padding:14px;
+background:#16803c;
+color:white;
+border:0;
+border-radius:8px;
+font-size:16px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>🐔 Poultry RC Manager</h1>
+<p>Batch & Rearing Charges</p>
+</header>
+
+<div class="container">
+
+<div class="card">
+<h2>📋 Create New RC</h2>
+
+<label>Farmer Name</label>
+<input type="text" placeholder="Enter farmer name">
+
+<label>Company / Hatchery</label>
+<input type="text" placeholder="Enter company">
+
+<label>Batch Number</label>
+<input type="text" placeholder="Enter batch number">
+
+<label>Chicks Housed</label>
+<input type="number" placeholder="Enter chicks">
+
+<label>Mortality</label>
+<input type="number" placeholder="Enter mortality">
+
+<label>Birds Sold</label>
+<input type="number" placeholder="Enter birds sold">
+
+<button>📊 Calculate RC</button>
+
+</div>
+
+</div>
+
+</body>
+</html>
