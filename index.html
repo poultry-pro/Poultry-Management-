@@ -99,11 +99,52 @@ font-size:16px;
 <label>Overhead / Other Cost (₹)</label>
 <input type="number" placeholder="Enter other cost">
 
-<button>📊 Calculate RC</button>
+<button onclick="calculateRC()">📊 Calculate RC</button>
 
 </div>
 
 </div>
 
-</body>
+</body><script>
+function calculateRC(){
+
+  const inputs = document.querySelectorAll("input");
+
+  const chicks = Number(inputs[3].value) || 0;
+  const mortality = Number(inputs[4].value) || 0;
+  const birdsSold = Number(inputs[5].value) || 0;
+  const liveWeight = Number(inputs[6].value) || 0;
+  const feed = Number(inputs[7].value) || 0;
+  const chickCost = Number(inputs[8].value) || 0;
+  const feedCost = Number(inputs[9].value) || 0;
+  const medicine = Number(inputs[10].value) || 0;
+  const vaccine = Number(inputs[11].value) || 0;
+  const otherCost = Number(inputs[12].value) || 0;
+
+  const mortalityPercent =
+    chicks > 0 ? (mortality / chicks) * 100 : 0;
+
+  const liveBirds = chicks - mortality;
+
+  const fcr =
+    liveWeight > 0 ? feed / liveWeight : 0;
+
+  const totalCost =
+    chickCost + feedCost + medicine + vaccine + otherCost;
+
+  const costPerKg =
+    liveWeight > 0 ? totalCost / liveWeight : 0;
+
+  document.getElementById("result").innerHTML = `
+    <h2>📊 Batch Result</h2>
+    <p><b>Live Birds:</b> ${liveBirds}</p>
+    <p><b>Mortality:</b> ${mortalityPercent.toFixed(2)}%</p>
+    <p><b>FCR:</b> ${fcr.toFixed(3)}</p>
+    <p><b>Total Production Cost:</b> ₹${totalCost.toFixed(2)}</p>
+    <p><b>Production Cost / KG:</b> ₹${costPerKg.toFixed(2)}</p>
+  `;
+
+  document.getElementById("result").style.display = "block";
+}
+</script>
 </html>
