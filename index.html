@@ -4,241 +4,215 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>PoultryPro | Smart Poultry Farm Management</title>
+<title>PoultryPro - Poultry Smart</title>
 
 <style>
 *{
   box-sizing:border-box;
   margin:0;
   padding:0;
+  font-family:Arial,sans-serif;
 }
 
 body{
-  font-family:Arial,sans-serif;
-  background:#faf8f1;
-  color:#14231b;
+  background:#f5f7f6;
+  color:#17231d;
 }
 
-header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:18px 7%;
-  background:#faf8f1;
-  border-bottom:1px solid #eee8d9;
+.sidebar{
+  position:fixed;
+  left:0;
+  top:0;
+  width:220px;
+  height:100vh;
+  background:#123b2a;
+  color:white;
+  padding:25px 15px;
 }
 
 .logo{
   font-size:22px;
   font-weight:bold;
-  color:#174b32;
+  padding:0 10px;
+  margin-bottom:8px;
 }
 
-.logo span{
-  color:#e8a928;
+.smart{
+  color:#8ed35c;
+  font-size:13px;
+  padding:0 10px;
+  margin-bottom:35px;
 }
 
-.header-btn{
-  background:#174b32;
-  color:white;
-  border:0;
-  padding:13px 20px;
-  border-radius:25px;
-  font-weight:bold;
-}
-
-.hero{
-  max-width:1100px;
-  margin:auto;
-  padding:75px 7% 45px;
-}
-
-.badge{
-  display:inline-block;
-  padding:9px 15px;
-  border:1px solid #e7ddc8;
-  border-radius:25px;
-  background:#fffaf0;
-  color:#4c554e;
-  font-size:14px;
-  margin-bottom:25px;
-}
-
-h1{
-  font-family:Georgia,serif;
-  font-size:52px;
-  line-height:1.08;
-  max-width:750px;
-  margin-bottom:25px;
-}
-
-.hero p{
-  color:#657069;
-  font-size:18px;
-  line-height:1.7;
-  max-width:700px;
-}
-
-.buttons{
-  margin-top:30px;
-  display:flex;
-  flex-wrap:wrap;
-  gap:12px;
-}
-
-.btn{
-  padding:15px 22px;
-  border-radius:30px;
-  border:1px solid #ddd8ca;
-  background:white;
-  font-size:15px;
-  font-weight:bold;
+.menu{
+  padding:13px 12px;
+  margin:5px 0;
+  border-radius:9px;
   cursor:pointer;
 }
 
-.btn-main{
-  background:#174b32;
-  color:white;
-  border:none;
+.menu:hover{
+  background:#1d523b;
 }
 
-.btn-gold{
-  background:#f1b52b;
-  color:#18251d;
-  border:none;
+.main{
+  margin-left:220px;
+  padding:30px;
 }
 
-.features{
-  max-width:1100px;
-  margin:auto;
-  padding:25px 7% 60px;
+.top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:30px;
 }
 
-.features h2{
-  font-family:Georgia,serif;
-  font-size:32px;
-  margin-bottom:25px;
+.top h1{
+  font-size:27px;
 }
 
-.grid{
+.top p{
+  color:#748078;
+  margin-top:5px;
+}
+
+.profile{
+  background:white;
+  padding:10px 15px;
+  border-radius:25px;
+  border:1px solid #e4e8e5;
+}
+
+.cards{
   display:grid;
-  grid-template-columns:repeat(3,1fr);
+  grid-template-columns:repeat(4,1fr);
   gap:16px;
 }
 
 .card{
   background:white;
-  padding:25px;
-  border-radius:18px;
-  border:1px solid #eee8dc;
-  box-shadow:0 5px 20px rgba(0,0,0,.04);
+  padding:22px;
+  border-radius:15px;
+  border:1px solid #e7ebe8;
+  box-shadow:0 3px 12px rgba(0,0,0,.04);
 }
 
-.icon{
-  font-size:28px;
-  margin-bottom:15px;
-}
-
-.card h3{
-  margin-bottom:8px;
-  color:#174b32;
-}
-
-.card p{
-  color:#707870;
-  line-height:1.5;
+.card-title{
+  color:#77827c;
   font-size:14px;
 }
 
-.dashboard{
-  max-width:1100px;
-  margin:0 auto 60px;
-  padding:0 7%;
+.value{
+  font-size:27px;
+  font-weight:bold;
+  margin-top:10px;
 }
 
-.dashboard-box{
-  background:#174b32;
-  color:white;
-  border-radius:25px;
-  padding:30px;
+.green{
+  color:#198754;
 }
 
-.dashboard-box h2{
-  font-family:Georgia,serif;
-  font-size:30px;
-  margin-bottom:20px;
-}
-
-.stats{
+.content{
   display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:12px;
+  grid-template-columns:2fr 1fr;
+  gap:18px;
+  margin-top:20px;
 }
 
-.stat{
-  background:rgba(255,255,255,.1);
-  padding:20px;
+.box{
+  background:white;
+  padding:22px;
   border-radius:15px;
+  border:1px solid #e7ebe8;
 }
 
-.stat small{
-  color:#cbd9d0;
+.box h2{
+  font-size:18px;
+  margin-bottom:18px;
 }
 
-.stat strong{
-  display:block;
-  font-size:25px;
-  margin-top:7px;
+.batch{
+  padding:15px;
+  background:#f6f9f7;
+  border-radius:10px;
+  margin-bottom:10px;
 }
 
-footer{
-  text-align:center;
-  padding:30px;
-  color:#777;
-  border-top:1px solid #eee8d9;
+.batch strong{
+  color:#123b2a;
 }
 
-@media(max-width:700px){
+.quick button{
+  width:100%;
+  padding:13px;
+  margin-bottom:10px;
+  border:0;
+  border-radius:9px;
+  background:#123b2a;
+  color:white;
+  font-size:14px;
+}
 
-  header{
-    padding:16px 20px;
+.quick button:hover{
+  background:#1d523b;
+}
+
+@media(max-width:800px){
+
+  .sidebar{
+    width:70px;
+    padding:20px 8px;
   }
 
   .logo{
-    font-size:20px;
+    font-size:0;
+    text-align:center;
   }
 
-  .header-btn{
-    padding:11px 14px;
-    font-size:12px;
+  .logo:first-letter{
+    font-size:25px;
   }
 
-  .hero{
-    padding:55px 20px 35px;
+  .smart{
+    display:none;
   }
 
-  h1{
-    font-size:40px;
+  .menu{
+    font-size:0;
+    text-align:center;
   }
 
-  .hero p{
-    font-size:16px;
+  .main{
+    margin-left:70px;
+    padding:18px;
   }
 
-  .features{
-    padding:20px;
+  .cards{
+    grid-template-columns:repeat(2,1fr);
   }
 
-  .grid{
+  .content{
     grid-template-columns:1fr;
   }
 
-  .dashboard{
-    padding:0 20px;
+  .top h1{
+    font-size:21px;
+  }
+}
+
+@media(max-width:480px){
+
+  .cards{
+    grid-template-columns:1fr 1fr;
+    gap:10px;
   }
 
-  .stats{
-    grid-template-columns:repeat(2,1fr);
+  .card{
+    padding:16px;
+  }
+
+  .value{
+    font-size:22px;
   }
 }
 </style>
@@ -246,157 +220,113 @@ footer{
 
 <body>
 
-<header>
-  <div class="logo">🐔 Poultry<span>Pro</span></div>
-  <button class="header-btn" onclick="startFarm()">
-    Create Farm Account →
-  </button>
-</header>
+<div class="sidebar">
 
-<section class="hero">
+  <div class="logo">🐔 PoultryPro</div>
+  <div class="smart">Poultry Smart</div>
 
-  <div class="badge">✨ Capture · Understand · Improve</div>
+  <div class="menu">🏠 Dashboard</div>
+  <div class="menu">🐔 My Farm</div>
+  <div class="menu">📋 Batches</div>
+  <div class="menu">📝 Daily Entry</div>
+  <div class="menu">🌾 Feed</div>
+  <div class="menu">📉 Mortality</div>
+  <div class="menu">💰 Rearing Charges</div>
+  <div class="menu">📊 Reports</div>
 
-  <h1>
-    Run your poultry farm with clarity, control and confidence.
-  </h1>
+</div>
 
-  <p>
-    PoultryPro brings batch management, feed, mortality, health,
-    sales and rearing charges into one simple platform —
-    helping poultry farmers understand their farm performance.
-  </p>
+<div class="main">
 
-  <div class="buttons">
-    <button class="btn btn-main" onclick="startFarm()">
-      Explore Dashboard →
-    </button>
+  <div class="top">
 
-    <button class="btn btn-gold" onclick="newBatch()">
-      🚀 Create New Batch
-    </button>
-
-    <button class="btn" onclick="showMessage('Tutorials coming soon')">
-      🎓 Explore Tutorials
-    </button>
-  </div>
-
-</section>
-
-<section class="features">
-
-  <h2>Everything your farm needs</h2>
-
-  <div class="grid">
-
-    <div class="card">
-      <div class="icon">🐔</div>
-      <h3>Batch Management</h3>
-      <p>
-        Manage chicks, placement, mortality and birds sold
-        batch by batch.
-      </p>
+    <div>
+      <h1>Good Evening, Farmer 👋</h1>
+      <p>Here's your farm overview</p>
     </div>
 
-    <div class="card">
-      <div class="icon">🌾</div>
-      <h3>Feed Tracking</h3>
-      <p>
-        Record feed consumption and understand your FCR
-        and feed cost.
-      </p>
-    </div>
-
-    <div class="card">
-      <div class="icon">💉</div>
-      <h3>Health & Vaccines</h3>
-      <p>
-        Keep medicine and vaccination expenses organised
-        for every batch.
-      </p>
-    </div>
-
-    <div class="card">
-      <div class="icon">📉</div>
-      <h3>Mortality</h3>
-      <p>
-        Track mortality percentage and monitor batch
-        performance.
-      </p>
-    </div>
-
-    <div class="card">
-      <div class="icon">💰</div>
-      <h3>Rearing Charges</h3>
-      <p>
-        Calculate production cost and understand your
-        rearing charges.
-      </p>
-    </div>
-
-    <div class="card">
-      <div class="icon">📊</div>
-      <h3>Farm Insights</h3>
-      <p>
-        See important numbers like FCR, cost per KG
-        and batch performance.
-      </p>
+    <div class="profile">
+      👤 My Farm
     </div>
 
   </div>
 
-</section>
+  <div class="cards">
 
-<section class="dashboard">
+    <div class="card">
+      <div class="card-title">Live Birds</div>
+      <div class="value green">995</div>
+    </div>
 
-  <div class="dashboard-box">
+    <div class="card">
+      <div class="card-title">Mortality</div>
+      <div class="value">0.50%</div>
+    </div>
 
-    <h2>Farm performance at a glance</h2>
+    <div class="card">
+      <div class="card-title">Feed Consumed</div>
+      <div class="value">120 KG</div>
+    </div>
 
-    <div class="stats">
+    <div class="card">
+      <div class="card-title">FCR</div>
+      <div class="value">1.52</div>
+    </div>
 
-      <div class="stat">
-        <small>Live Birds</small>
-        <strong>—</strong>
+  </div>
+
+  <div class="content">
+
+    <div class="box">
+
+      <h2>🐔 Active Batches</h2>
+
+      <div class="batch">
+        <strong>Batch-001</strong><br>
+        <small>My Poultry Farm · 1,000 Chicks</small>
       </div>
 
-      <div class="stat">
-        <small>Mortality</small>
-        <strong>—</strong>
+      <div class="batch">
+        <strong>Batch-002</strong><br>
+        <small>New Batch · 2,500 Chicks</small>
       </div>
 
-      <div class="stat">
-        <small>FCR</small>
-        <strong>—</strong>
-      </div>
+    </div>
 
-      <div class="stat">
-        <small>Cost / KG</small>
-        <strong>—</strong>
-      </div>
+    <div class="box quick">
+
+      <h2>Quick Actions</h2>
+
+      <button onclick="newBatch()">➕ New Batch</button>
+
+      <button onclick="dailyEntry()">📝 Daily Entry</button>
+
+      <button onclick="rearing()">💰 Rearing Charges</button>
+
+      <button onclick="reports()">📊 View Reports</button>
 
     </div>
 
   </div>
 
-</section>
-
-<footer>
-  PoultryPro © 2026 · Smart Poultry Farm Management
-</footer>
+</div>
 
 <script>
 
-function startFarm(){
-  alert("Farm Account & Dashboard coming next.");
-}
-
 function newBatch(){
-  alert("New Batch setup coming next.");
+  alert("New Batch");
 }
 
-function showMessage(message){
-  alert(message);
+function dailyEntry(){
+  alert("Daily Entry");
+}
+
+function rearing(){
+  alert("Rearing Charges");
+}
+
+function reports(){
+  alert("Reports");
 }
 
 </script>
