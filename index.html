@@ -3,437 +3,1428 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>PoultryPro - Poultry Smart</title>
+<title>PoultryPro - Poultry Manager</title>
 
 <style>
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-  font-family:Arial,sans-serif;
-}
+*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
+body{background:#f4f7f5;color:#18352a}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+.app{display:flex;min-height:100vh}
+.sidebar{width:220px;background:#0d3b2a;color:#fff;padding:18px 12px;position:fixed;left:0;top:0;bottom:0}
+.logo{font-size:20px;font-weight:bold;margin-bottom:2px}
+.smart{font-size:11px;color:#8bd8ae;margin-bottom:28px}
+.menu{padding:11px 10px;border-radius:8px;margin:4px 0;cursor:pointer;font-size:14px}
+.menu:hover,.menu.active{background:#14563e}
+.main{margin-left:220px;width:calc(100% - 220px);padding:24px;max-width:1250px}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.top h1{font-size:22px}
+.top p{font-size:13px;color:#718078;margin-top:5px}
+.profile{background:#fff;border:1px solid #e1e8e4;padding:10px 14px;border-radius:22px;font-size:13px}
+.page{display:none}.page.active{display:block}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}
+.card,.box{background:#fff;border:1px solid #e4ebe7;border-radius:14px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.card-title{font-size:12px;color:#6d7b74;margin-bottom:8px}
+.value{font-size:23px;font-weight:bold}
+.green{color:#16804b}
+.box{margin-bottom:16px}
+.box h2{font-size:16px;margin-bottom:14px}
+.batch{padding:12px;border:1px solid #e4ebe7;border-radius:10px;margin:8px 0;background:#fbfdfc}
+.quick{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.btn{border:0;border-radius:8px;padding:11px 14px;background:#0f4a35;color:white}
+.btn.secondary{background:white;color:#164533;border:1px solid #d5dfda}
+.btn.danger{background:#b64242}
+.form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+label{font-size:12px;color:#617068;display:block;margin-bottom:5px}
+input,select,textarea{width:100%;padding:11px;border:1px solid #d7e0db;border-radius:8px;background:#fff;color:#18352a}
+textarea{min-height:80px;resize:vertical}
+.actions{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+.notice{padding:10px 12px;background:#eef8f2;border-radius:8px;color:#17633f;font-size:13px;margin-bottom:12px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{padding:9px;border-bottom:1px solid #e6ece8;text-align:left}
+th{background:#f7faf8}
+.metric-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.metric{background:#f7faf8;border-radius:10px;padding:12px}
+.metric b{display:block;font-size:19px;margin-top:4px}
+.empty{color:#78867f;font-size:13px;padding:10px}
+.small{font-size:12px;color:#78867f}
 
-body{
-  background:#f5f7f6;
-  color:#17231d;
-}
-
-.sidebar{
-  position:fixed;
-  left:0;
-  top:0;
-  width:220px;
-  height:100vh;
-  background:#123b2a;
-  color:white;
-  padding:25px 15px;
-}
-
-.logo{
-  font-size:22px;
-  font-weight:bold;
-  padding:0 10px;
-  margin-bottom:8px;
-}
-
-.smart{
-  color:#8ed35c;
-  font-size:13px;
-  padding:0 10px;
-  margin-bottom:35px;
-}
-
-.menu{
-  padding:13px 12px;
-  margin:5px 0;
-  border-radius:9px;
-  cursor:pointer;
-}
-
-.menu:hover{
-  background:#1d523b;
-}
-
-.main{
-  margin-left:220px;
-  padding:30px;
-}
-
-.top{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:30px;
-}
-
-.top h1{
-  font-size:27px;
-}
-
-.top p{
-  color:#748078;
-  margin-top:5px;
-}
-
-.profile{
-  background:white;
-  padding:10px 15px;
-  border-radius:25px;
-  border:1px solid #e4e8e5;
-}
-
-.cards{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:16px;
-}
-
-.card{
-  background:white;
-  padding:22px;
-  border-radius:15px;
-  border:1px solid #e7ebe8;
-  box-shadow:0 3px 12px rgba(0,0,0,.04);
-}
-
-.card-title{
-  color:#77827c;
-  font-size:14px;
-}
-
-.value{
-  font-size:27px;
-  font-weight:bold;
-  margin-top:10px;
-}
-
-.green{
-  color:#198754;
-}
-
-.content{
-  display:grid;
-  grid-template-columns:2fr 1fr;
-  gap:18px;
-  margin-top:20px;
-}
-
-.box{
-  background:white;
-  padding:22px;
-  border-radius:15px;
-  border:1px solid #e7ebe8;
-}
-
-.box h2{
-  font-size:18px;
-  margin-bottom:18px;
-}
-
-.batch{
-  padding:15px;
-  background:#f6f9f7;
-  border-radius:10px;
-  margin-bottom:10px;
-}
-
-.batch strong{
-  color:#123b2a;
-}
-
-.quick button{
-  width:100%;
-  padding:13px;
-  margin-bottom:10px;
-  border:0;
-  border-radius:9px;
-  background:#123b2a;
-  color:white;
-  font-size:14px;
-}
-
-.quick button:hover{
-  background:#1d523b;
-}
-
-@media(max-width:800px){
-
-  .sidebar{
-    width:70px;
-    padding:20px 8px;
-  }
-
-  .logo{
-    font-size:0;
-    text-align:center;
-  }
-
-  .logo:first-letter{
-    font-size:25px;
-  }
-
-  .smart{
-    display:none;
-  }
-
-  .menu{
-    font-size:0;
-    text-align:center;
-  }
-
-  .main{
-    margin-left:70px;
-    padding:18px;
-  }
-
-  .cards{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .content{
-    grid-template-columns:1fr;
-  }
-
-  .top h1{
-    font-size:21px;
-  }
-}
-
-@media(max-width:480px){
-
-  .cards{
-    grid-template-columns:1fr 1fr;
-    gap:10px;
-  }
-
-  .card{
-    padding:16px;
-  }
-
-  .value{
-    font-size:22px;
-  }
+@media(max-width:700px){
+.sidebar{width:155px;padding:14px 8px}
+.main{margin-left:155px;width:calc(100% - 155px);padding:14px 10px}
+.cards{grid-template-columns:repeat(2,1fr)}
+.form-grid{grid-template-columns:1fr}
+.quick{grid-template-columns:1fr}
+.top h1{font-size:18px}
+.top{align-items:flex-start}
+.profile{font-size:11px;padding:8px}
+.menu{font-size:12px;padding:9px 6px}
 }
 </style>
 </head>
 
 <body>
 
-<div class="sidebar">
+<div class="app">
 
-  <div class="logo">🐔 PoultryPro</div>
-  <div class="smart">Poultry Smart</div>
+<aside class="sidebar">
+<div class="logo">🐔 PoultryPro</div>
+<div class="smart">Poultry Smart</div>
 
-  <div class="menu">🏠 Dashboard</div>
-  <div class="menu">🐔 My Farm</div>
-  <div class="menu" onclick="batches()">🐔 Batches</div>
-  <div class="menu">📝 Daily Entry</div>
-  <div class="menu">🌾 Feed</div>
-  <div class="menu">📉 Mortality</div>
-  <div class="menu">💰 Rearing Charges</div>
-  <div class="menu">📊 Reports</div>
+<div class="menu active" onclick="showPage('dashboard',this)">🏠 Dashboard</div>
+<div class="menu" onclick="showPage('farm',this)">🏠 My Farm</div>
+<div class="menu" onclick="showPage('batches',this)">🐔 Batches</div>
+<div class="menu" onclick="showPage('daily',this)">📝 Daily Entry</div>
+<div class="menu" onclick="showPage('feed',this)">🌾 Feed</div>
+<div class="menu" onclick="showPage('mortality',this)">📉 Mortality</div>
+<div class="menu" onclick="showPage('rearing',this)">💰 Rearing Charges</div>
+<div class="menu" onclick="showPage('reports',this)">📊 Reports</div>
+</aside>
+
+<main class="main">
+
+<div class="top">
+<div>
+<h1>Good Evening, Farmer 👋</h1>
+<p>Here's your farm overview</p>
+</div>
+<div class="profile">👤 My Farm</div>
+</div>
+
+<section id="dashboard" class="page active">
+
+<div class="cards">
+
+<div class="card">
+<div class="card-title">Live Birds</div>
+<div class="value green" id="dashLive">0</div>
+</div>
+
+<div class="card">
+<div class="card-title">Mortality</div>
+<div class="value" id="dashMort">0%</div>
+</div>
+
+<div class="card">
+<div class="card-title">Feed Consumed</div>
+<div class="value" id="dashFeed">0 KG</div>
+</div>
+
+<div class="card">
+<div class="card-title">FCR</div>
+<div class="value" id="dashFcr">0.00</div>
+</div>
 
 </div>
 
-<div class="main">
-
-  <div class="top">
-
-    <div>
-      <h1>Good Evening, Farmer 👋</h1>
-      <p>Here's your farm overview</p>
-    </div>
-
-    <div class="profile">
-      👤 My Farm
-    </div>
-
-  </div>
-
-  <div class="cards">
-
-    <div class="card">
-      <div class="card-title">Live Birds</div>
-      <div class="value green">995</div>
-    </div>
-
-    <div class="card">
-      <div class="card-title">Mortality</div>
-      <div class="value">0.50%</div>
-    </div>
-
-    <div class="card">
-      <div class="card-title">Feed Consumed</div>
-      <div class="value">120 KG</div>
-    </div>
-
-    <div class="card">
-      <div class="card-title">FCR</div>
-      <div class="value">1.52</div>
-    </div>
-
-  </div>
-
-  <div class="content">
-
-    <div class="box">
-
-      <h2>🐔 Active Batches</h2>
-
-<div id="batchList">
-  <p>Loading batches...</p>
+<div class="box">
+<h2>🐔 Active Batches</h2>
+<div id="dashboardBatches">
+<div class="empty">Loading batches...</div>
+</div>
 </div>
 
-    <div class="box quick">
+<div class="box">
+<h2>Quick Actions</h2>
 
-      <h2>Quick Actions</h2>
+<div class="quick">
 
-      <button onclick="newBatch()">➕ New Batch</button>
+<button class="btn" onclick="openNewBatch()">➕ New Batch</button>
 
-      <button onclick="dailyEntry()">📝 Daily Entry</button>
+<button class="btn" onclick="showPage('daily')">
+📝 Daily Entry
+</button>
 
-      <button onclick="rearing()">💰 Rearing Charges</button>
+<button class="btn" onclick="showPage('rearing')">
+💰 Rearing Charges
+</button>
 
-      <button onclick="reports()">📊 View Reports</button>
+<button class="btn" onclick="showPage('reports')">
+📊 View Reports
+</button>
 
-    </div>
+</div>
+</div>
 
-  </div>
+</section>
 
+<section id="farm" class="page">
+
+<div class="box">
+<h2>🏠 My Farm</h2>
+<div id="farmDetails">Loading...</div>
+</div>
+
+</section>
+
+<section id="batches" class="page">
+
+<div class="box">
+
+<div style="display:flex;justify-content:space-between;gap:8px;align-items:center">
+
+<h2>🐔 My Batches</h2>
+
+<button class="btn" onclick="openNewBatch()">
+➕ New Batch
+</button>
+
+</div>
+
+<div id="batchPageList">
+<div class="empty">Loading...</div>
+</div>
+
+</div>
+
+</section>
+
+<section id="daily" class="page">
+
+<div class="box">
+
+<h2>📝 Daily Entry</h2>
+
+<div class="notice">
+Enter today's batch performance. Values are saved to Supabase.
+</div>
+
+<div class="form-grid">
+
+<div>
+<label>Batch</label>
+<select id="dailyFlock"></select>
+</div>
+
+<div>
+<label>Date</label>
+<input id="dailyDate" type="date">
+</div>
+
+<div>
+<label>Opening Birds</label>
+<input id="openingBirds" type="number">
+</div>
+
+<div>
+<label>Mortality</label>
+<input id="dailyMortality" type="number" value="0">
+</div>
+
+<div>
+<label>Closing Birds</label>
+<input id="closingBirds" type="number">
+</div>
+
+<div>
+<label>Feed Consumed (KG)</label>
+<input id="dailyFeed" type="number" step="0.01">
+</div>
+
+<div>
+<label>Average Weight (KG) <span class="small">(optional)</span></label>
+<input id="avgWeight" type="number" step="0.001">
+</div>
+
+<div>
+<label>Remarks</label>
+<input id="dailyRemarks">
+</div>
+
+</div>
+
+<div class="actions">
+
+<button class="btn" onclick="saveDaily()">
+Save Daily Entry
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+<section id="feed" class="page">
+
+<div class="box">
+
+<h2>🌾 Feed Stock</h2>
+
+<div class="form-grid">
+
+<div>
+<label>Feed Name</label>
+<input id="feedName" placeholder="Starter Feed">
+</div>
+
+<div>
+<label>Quantity (KG)</label>
+<input id="feedQty" type="number" step="0.01">
+</div>
+
+<div>
+<label>Date</label>
+<input id="feedDate" type="date">
+</div>
+
+<div>
+<label>Remarks</label>
+<input id="feedRemarks">
+</div>
+
+</div>
+
+<div class="actions">
+
+<button class="btn" onclick="saveFeed()">
+Save Feed Stock
+</button>
+
+</div>
+
+</div>
+
+<div class="box">
+
+<h2>Current Feed</h2>
+
+<div id="feedList">
+<div class="empty">Loading...</div>
+</div>
+
+</div>
+
+</section>
+
+<section id="mortality" class="page">
+
+<div class="box">
+<h2>📉 Mortality</h2>
+<div id="mortalitySummary"></div>
+</div>
+
+<div class="box">
+<h2>Recent Daily Records</h2>
+<div id="mortalityList"></div>
+</div>
+
+</section>
+
+<section id="rearing" class="page">
+
+<div class="box">
+
+<h2>💰 Rearing Charges</h2>
+
+<div class="notice">
+This section gives an estimated production cost and cost per KG from recorded batch expenses and sales.
+</div>
+
+<div id="rearingSummary"></div>
+
+</div>
+
+</section>
+
+<section id="reports" class="page">
+
+<div class="box">
+
+<h2>📊 Batch Reports</h2>
+
+<div id="reportArea">
+<div class="empty">Loading...</div>
+</div>
+
+</div>
+
+</section>
+
+<div id="modal"
+style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);padding:20px;z-index:20;overflow:auto">
+
+<div style="background:white;max-width:620px;margin:30px auto;border-radius:16px;padding:20px">
+
+<h2>🐔 Create New Batch</h2>
+
+<p class="small" style="margin:6px 0 16px">
+Enter your batch details
+</p>
+
+<div class="form-grid">
+
+<div>
+<label>Company / Hatchery</label>
+<input id="newCompany">
+</div>
+
+<div>
+<label>Batch Number</label>
+<input id="newBatch">
+</div>
+
+<div>
+<label>Chicks Housed</label>
+<input id="newChicks" type="number">
+</div>
+
+<div>
+<label>Chick Rate ₹</label>
+<input id="newRate" type="number" step="0.01">
+</div>
+
+<div>
+<label>Placement Date</label>
+<input id="newDate" type="date">
+</div>
+
+</div>
+
+<div class="actions">
+
+<button class="btn" onclick="saveBatch()">
+Save Batch
+</button>
+
+<button class="btn secondary" onclick="closeModal()">
+Cancel
+</button>
+
+</div>
+
+</div>
+</div>
+
+</main>
 </div>
 
 <script>
 
-function newBatch(){
+const SUPABASE_URL = "https://bgbhdlzfxxlxsuteakir.supabase.co";
 
-  document.body.insertAdjacentHTML("beforeend",`
+const SUPABASE_KEY = "YOUR_PUBLISHABLE_KEY_HERE";
 
-    <div id="batchForm"
-      style="
-      position:fixed;
-      inset:0;
-      background:rgba(0,0,0,.45);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:20px;
-      z-index:9999;
-      ">
+const FARM_ID = 1;
 
-      <div style="
-        background:white;
-        width:100%;
-        max-width:500px;
-        padding:25px;
-        border-radius:18px;
-        box-shadow:0 10px 40px rgba(0,0,0,.2);
-      ">
+const headers = {
+"apikey": SUPABASE_KEY,
+"Authorization": "Bearer " + SUPABASE_KEY,
+"Content-Type": "application/json"
+};
 
-        <h2 style="color:#123b2a;margin-bottom:8px;">
-          🐔 Create New Batch
-        </h2>
+function api(path, options={}){
+options.headers = {...headers, ...(options.headers||{})};
 
-        <p style="color:#777;margin-bottom:20px;">
-          Enter your batch details
-        </p>
-
-        <input placeholder="Company / Hatchery"
-          style="width:100%;padding:13px;margin-bottom:10px;border:1px solid #ddd;border-radius:8px;">
-
-        <input placeholder="Batch Number"
-          style="width:100%;padding:13px;margin-bottom:10px;border:1px solid #ddd;border-radius:8px;">
-
-        <input type="number" placeholder="Chicks Housed"
-          style="width:100%;padding:13px;margin-bottom:10px;border:1px solid #ddd;border-radius:8px;">
-
-        <input type="number" placeholder="Chick Rate ₹"
-          style="width:100%;padding:13px;margin-bottom:10px;border:1px solid #ddd;border-radius:8px;">
-
-        <input type="date"
-          style="width:100%;padding:13px;margin-bottom:18px;border:1px solid #ddd;border-radius:8px;">
-
-        <button onclick="saveBatch()"
-          style="
-          width:100%;
-          padding:14px;
-          border:0;
-          border-radius:9px;
-          background:#123b2a;
-          color:white;
-          font-size:15px;
-          ">
-          Save Batch
-        </button>
-
-        <button onclick="document.getElementById('batchForm').remove()"
-          style="
-          width:100%;
-          padding:12px;
-          margin-top:8px;
-          border:1px solid #ddd;
-          border-radius:9px;
-          background:white;
-          ">
-          Cancel
-        </button>
-
-      </div>
-    </div>
-  `);
+return fetch(
+SUPABASE_URL + "/rest/v1/" + path,
+options
+);
 }
+
+function today(){
+return new Date().toISOString().slice(0,10);
+}
+
+function esc(v){
+return String(v ?? "").replace(
+/[&<>"']/g,
+m => ({
+"&":"&amp;",
+"<":"&lt;",
+">":"&gt;",
+'"':"&quot;",
+"'":"&#39;"
+}[m])
+);
+}
+
+function showPage(id,el){
+
+document.querySelectorAll(".page")
+.forEach(p=>p.classList.remove("active"));
+
+document.getElementById(id).classList.add("active");
+
+document.querySelectorAll(".menu")
+.forEach(m=>m.classList.remove("active"));
+
+if(el) el.classList.add("active");
+
+if(id==="dashboard") loadDashboard();
+if(id==="farm") loadFarm();
+if(id==="batches") loadBatches();
+if(id==="daily") prepareDaily();
+if(id==="feed") loadFeed();
+if(id==="mortality") loadMortality();
+if(id==="rearing") loadRearing();
+if(id==="reports") loadReports();
+
+}
+
+function openNewBatch(){
+
+document.getElementById("modal").style.display="block";
+
+document.getElementById("newDate").value=today();
+
+}
+
+function closeModal(){
+
+document.getElementById("modal").style.display="none";
+
+}
+
+async function loadFlocks(){
+
+const r=await api(
+"flocks?select=*&order=id.desc"
+);
+
+if(!r.ok)
+throw new Error(await r.text());
+
+return await r.json();
+
+}
+
+async function loadDashboard(){
+
+try{
+
+const [flocks,records,feed]=await Promise.all([
+
+loadFlocks(),
+
+api("daily_records?select=*&order=record_date.desc"),
+
+api("feed_stock?select=*&order=id.desc")
+
+]);
+
+const recs=await records.json();
+
+const feeds=await feed.json();
+
+let housed=flocks.reduce(
+(s,b)=>s+(Number(b.bird_count)||0),
+0
+);
+
+let mortality=recs.reduce(
+(s,r)=>s+(Number(r.mortality)||0),
+0
+);
+
+let feedKg=recs.reduce(
+(s,r)=>s+(Number(r.feed_kg)||0),
+0
+);
+
+let live=Math.max(
+0,
+housed-mortality
+);
+
+let weight=recs.reduce(
+(s,r)=>
+s+
+(Number(r.closing_birds)||0)*
+(Number(r.avg_weight_kg)||0),
+0
+);
+
+document.getElementById("dashLive")
+.textContent=live;
+
+document.getElementById("dashMort")
+.textContent=
+(housed?(mortality/housed*100):0)
+.toFixed(2)+"%";
+
+document.getElementById("dashFeed")
+.textContent=
+feedKg.toFixed(0)+" KG";
+
+document.getElementById("dashFcr")
+.textContent=
+(weight?feedKg/weight:0)
+.toFixed(2);
+
+renderBatchList(
+flocks,
+"dashboardBatches"
+);
+
+}catch(e){
+
+document.getElementById(
+"dashboardBatches"
+).innerHTML=
+'<div class="empty">Unable to load batches.</div>';
+
+}
+
+}
+
+function renderBatchList(data,id){
+
+const box=document.getElementById(id);
+
+if(!data.length){
+
+box.innerHTML=
+'<div class="empty">No batches found.</div>';
+
+return;
+
+}
+
+box.innerHTML=data.map(b=>`
+
+<div class="batch">
+
+<strong>
+${esc(b.batch_name)}
+</strong>
+
+<br>
+
+<small>
+${Number(b.bird_count)||0}
+Chicks ·
+${esc(b.status||"Active")}
+</small>
+
+</div>
+
+`).join("");
+
+}
+
+async function loadBatches(){
+
+try{
+
+renderBatchList(
+await loadFlocks(),
+"batchPageList"
+);
+
+}catch(e){
+
+document.getElementById(
+"batchPageList"
+).innerHTML=
+'<div class="empty">Unable to load batches.</div>';
+
+}
+
+}
+
+async function loadFarm(){
+
+try{
+
+const r=await api(
+"farms?select=*&id=eq."+FARM_ID
+);
+
+const d=await r.json();
+
+const f=d[0];
+
+document.getElementById(
+"farmDetails"
+).innerHTML=f?`
+
+<p>
+<b>Farm Name:</b>
+${esc(f.farm_name)}
+</p>
+
+<p>
+<b>Location:</b>
+${esc(f.location)}
+</p>
+
+<p>
+<b>Capacity:</b>
+${esc(f.capacity)} Birds
+</p>
+
+<p>
+<b>Status:</b>
+${esc(f.status)}
+</p>
+
+`:"No farm found.";
+
+}catch(e){
+
+document.getElementById(
+"farmDetails"
+).textContent=
+"Unable to load farm.";
+
+}
+
+}
+
 async function saveBatch(){
 
-  const inputs = document.querySelectorAll("#batchForm input");
+const company=
+document.getElementById("newCompany")
+.value.trim();
 
-  const company = inputs[0].value;
-  const batch = inputs[1].value;
-  const chicks = Number(inputs[2].value) || 0;
-  const chickRate = Number(inputs[3].value) || 0;
-  const date = inputs[4].value;
+const batch=
+document.getElementById("newBatch")
+.value.trim();
 
-  const response = await fetch(
-    SUPABASE_URL + "/rest/v1/flocks",
-    {
-      method: "POST",
-      headers: {
-        "apikey": SUPABASE_KEY,
-        "Authorization": "Bearer " + SUPABASE_KEY,
-        "Content-Type": "application/json",
-        "Prefer": "return=representation"
-      },
-      body: JSON.stringify({
-        farm_id: 1,
-        batch_name: batch,
-        bird_count: chicks,
-        placement_date: date,
-        status: "Active"
-      })
-    }
-  );
+const chicks=
+Number(
+document.getElementById("newChicks").value
+);
 
-  if(response.ok){
-    alert("Batch saved successfully! 🐔");
-    document.getElementById("batchForm").remove();
-  }else{
-    const error = await response.text();
-    alert("Save failed: " + error);
-  }
-}
-function dailyEntry(){
-  alert("Daily Entry");
+const rate=
+Number(
+document.getElementById("newRate").value
+)||0;
+
+const date=
+document.getElementById("newDate").value;
+
+if(
+!company||
+!batch||
+!chicks||
+!date
+){
+
+alert(
+"Please enter Company, Batch Number, Chicks and Date."
+);
+
+return;
+
 }
 
-function rearing(){
-  alert("Rearing Charges");
+const r=await api(
+"flocks",
+{
+method:"POST",
+
+headers:{
+"Prefer":"return=representation"
+},
+
+body:JSON.stringify({
+
+farm_id:FARM_ID,
+
+batch_name:batch,
+
+bird_count:chicks,
+
+placement_date:date,
+
+status:"Active"
+
+})
+
+});
+
+if(r.ok){
+
+alert(
+"Batch saved successfully! 🐔"
+);
+
+closeModal();
+
+loadDashboard();
+
+loadBatches();
+
+}else{
+
+alert(
+"Save failed: "+
+await r.text()
+);
+
 }
 
-function reports(){
-  alert("Reports");
 }
 
-const SUPABASE_URL = "https://bgbhdlzfxxlxsuteakir.supabase.co"
-  const SUPABASE_KEY = "sb_publishable_Xah0jpqhtrM2v8AXy33BcQ_m8lsOPT_"
+async function prepareDaily(){
+
+document.getElementById(
+"dailyDate"
+).value=today();
+
+try{
+
+const flocks=await loadFlocks();
+
+document.getElementById(
+"dailyFlock"
+).innerHTML=
+flocks.map(
+b=>`
+<option value="${b.id}">
+${esc(b.batch_name)}
+</option>
+`
+).join("");
+
+const b=flocks[0];
+
+if(b){
+
+document.getElementById(
+"openingBirds"
+).value=b.bird_count||0;
+
+document.getElementById(
+"closingBirds"
+).value=b.bird_count||0;
+
+}
+
+}catch(e){}
+
+}
+
+async function saveDaily(){
+
+const flock=
+Number(
+document.getElementById("dailyFlock").value
+);
+
+const date=
+document.getElementById("dailyDate").value;
+
+const opening=
+Number(
+document.getElementById("openingBirds").value
+)||0;
+
+const mortality=
+Number(
+document.getElementById("dailyMortality").value
+)||0;
+
+const closing=
+Number(
+document.getElementById("closingBirds").value
+)||0;
+
+const feed=
+Number(
+document.getElementById("dailyFeed").value
+)||0;
+
+const avg=
+Number(
+document.getElementById("avgWeight").value
+)||null;
+
+const remarks=
+document.getElementById(
+"dailyRemarks"
+).value;
+
+if(!flock||!date){
+
+alert(
+"Select batch and date."
+);
+
+return;
+
+}
+
+const body={
+
+flock_id:flock,
+
+record_date:date,
+
+opening_birds:opening,
+
+mortality,
+
+closing_birds:closing,
+
+feed_kg:feed,
+
+remarks
+
+};
+
+if(avg!==null)
+body.avg_weight_kg=avg;
+
+const r=await api(
+"daily_records",
+{
+method:"POST",
+
+headers:{
+"Prefer":"return=representation"
+},
+
+body:JSON.stringify(body)
+
+}
+);
+
+if(r.ok){
+
+alert(
+"Daily entry saved successfully! ✅"
+);
+
+}else{
+
+alert(
+"Save failed: "+
+await r.text()
+);
+
+}
+
+}
+
+async function saveFeed(){
+
+const name=
+document.getElementById(
+"feedName"
+).value.trim();
+
+const qty=
+Number(
+document.getElementById(
+"feedQty"
+).value
+)||0;
+
+const date=
+document.getElementById(
+"feedDate"
+).value
+||today();
+
+const remarks=
+document.getElementById(
+"feedRemarks"
+).value;
+
+if(!name||!qty){
+
+alert(
+"Enter feed name and quantity."
+);
+
+return;
+
+}
+
+const r=await api(
+"feed_stock",
+{
+
+method:"POST",
+
+headers:{
+"Prefer":"return=representation"
+},
+
+body:JSON.stringify({
+
+farm_id:FARM_ID,
+
+feed_name:name,
+
+quantity_kg:qty,
+
+updated_date:date,
+
+remarks
+
+})
+
+}
+);
+
+if(r.ok){
+
+alert(
+"Feed stock saved! 🌾"
+);
+
+loadFeed();
+
+}else{
+
+alert(
+"Save failed: "+
+await r.text()
+);
+
+}
+
+}
+
+async function loadFeed(){
+
+try{
+
+const r=await api(
+"feed_stock?select=*&order=id.desc"
+);
+
+const d=await r.json();
+
+document.getElementById(
+"feedList"
+).innerHTML=d.length?
+
+d.map(
+x=>`
+
+<div class="batch">
+
+<b>
+${esc(x.feed_name)}
+</b>
+
+—
+${Number(x.quantity_kg).toFixed(2)}
+KG
+
+<br>
+
+<small>
+${esc(x.updated_date||"")}
+</small>
+
+</div>
+
+`
+).join("")
+
+:
+
+'<div class="empty">No feed stock.</div>';
+
+}catch(e){}
+
+}
+
+async function loadMortality(){
+
+try{
+
+const [fr,rr]=await Promise.all([
+
+loadFlocks(),
+
+api(
+"daily_records?select=*&order=record_date.desc"
+)
+
+]);
+
+const rec=await rr.json();
+
+const housed=
+fr.reduce(
+(s,b)=>s+(Number(b.bird_count)||0),
+0
+);
+
+const mort=
+rec.reduce(
+(s,r)=>s+(Number(r.mortality)||0),
+0
+);
+
+document.getElementById(
+"mortalitySummary"
+).innerHTML=`
+
+<div class="metric-grid">
+
+<div class="metric">
+Housed
+<b>${housed}</b>
+</div>
+
+<div class="metric">
+Mortality
+<b>${mort}</b>
+</div>
+
+<div class="metric">
+Mortality %
+<b>
+${(
+housed?
+mort/housed*100:
+0
+).toFixed(2)}%
+</b>
+</div>
+
+</div>
+
+`;
+
+document.getElementById(
+"mortalityList"
+).innerHTML=
+
+rec.length?
+
+`
+
+<table>
+
+<tr>
+<th>Date</th>
+<th>Mortality</th>
+<th>Closing</th>
+</tr>
+
+${
+rec.map(
+r=>`
+
+<tr>
+
+<td>
+${esc(r.record_date)}
+</td>
+
+<td>
+${r.mortality||0}
+</td>
+
+<td>
+${r.closing_birds||0}
+</td>
+
+</tr>
+
+`
+).join("")
+}
+
+</table>
+
+`
+
+:
+
+'<div class="empty">No records.</div>';
+
+}catch(e){}
+
+}
+
+async function loadRearing(){
+
+try{
+
+const [
+flockR,
+recR,
+saleR,
+expR
+]=await Promise.all([
+
+loadFlocks(),
+
+api(
+"daily_records?select=*"
+),
+
+api(
+"sales?select=*"
+),
+
+api(
+"expenses?select=*"
+)
+
+]);
+
+const flocks=flockR;
+
+const recs=await recR.json();
+
+const sales=await saleR.json();
+
+const exps=await expR.json();
+
+const chickCost=
+flocks.reduce(
+(s,b)=>
+s+
+(Number(b.bird_count)||0)*
+(Number(b.chick_cost_per_bird)||0),
+0
+);
+
+const feedCost=
+exps
+.filter(
+x=>
+String(x.category)
+.toLowerCase()==="feed"
+)
+.reduce(
+(s,x)=>s+Number(x.amount||0),
+0
+);
+
+const totalExp=
+exps.reduce(
+(s,x)=>s+Number(x.amount||0),
+0
+);
+
+const salesKg=
+sales.reduce(
+(s,x)=>
+s+
+Number(x.live_weight_kg||0),
+0
+);
+
+const prodCost=
+chickCost+
+totalExp;
+
+const costKg=
+salesKg?
+prodCost/salesKg:
+0;
+
+document.getElementById(
+"rearingSummary"
+).innerHTML=`
+
+<div class="metric-grid">
+
+<div class="metric">
+Chick Cost
+<b>
+₹${chickCost.toFixed(2)}
+</b>
+</div>
+
+<div class="metric">
+Other Expenses
+<b>
+₹${totalExp.toFixed(2)}
+</b>
+</div>
+
+<div class="metric">
+Production Cost
+<b>
+₹${prodCost.toFixed(2)}
+</b>
+</div>
+
+<div class="metric">
+Sales Weight
+<b>
+${salesKg.toFixed(2)} KG
+</b>
+</div>
+
+<div class="metric">
+Minimum Cost / KG
+<b>
+₹${costKg.toFixed(2)}
+</b>
+</div>
+
+<div class="metric">
+Feed Expense
+<b>
+₹${feedCost.toFixed(2)}
+</b>
+</div>
+
+</div>
+
+`;
+
+}catch(e){
+
+document.getElementById(
+"rearingSummary"
+).innerHTML=
+'<div class="empty">No complete cost/sales data yet.</div>';
+
+}
+
+}
+
+async function loadReports(){
+
+try{
+
+const [fr,rr,sr]=await Promise.all([
+
+loadFlocks(),
+
+api(
+"daily_records?select=*"
+),
+
+api(
+"sales?select=*"
+)
+
+]);
+
+const flocks=fr;
+
+const recs=await rr.json();
+
+const sales=await sr.json();
+
+let html=`
+
+<table>
+
+<tr>
+<th>Batch</th>
+<th>Chicks</th>
+<th>Mortality</th>
+<th>Feed KG</th>
+<th>FCR</th>
+<th>Sales KG</th>
+</tr>
+
+`;
+
+for(const b of flocks){
+
+const rs=
+recs.filter(
+x=>
+Number(x.flock_id)===
+Number(b.id)
+);
+
+const mort=
+rs.reduce(
+(s,x)=>
+s+Number(x.mortality||0),
+0
+);
+
+const feed=
+rs.reduce(
+(s,x)=>
+s+Number(x.feed_kg||0),
+0
+);
+
+const ss=
+sales.filter(
+x=>
+Number(x.farm_id)===
+FARM_ID
+);
+
+const kg=
+ss.reduce(
+(s,x)=>
+s+Number(x.live_weight_kg||0),
+0
+);
+
+html+=`
+
+<tr>
+
+<td>
+${esc(b.batch_name)}
+</td>
+
+<td>
+${b.bird_count||0}
+</td>
+
+<td>
+${mort}
+(
+${
+b.bird_count?
+(
+mort/b.bird_count*100
+).toFixed(2):
+0
+}%
+)
+</td>
+
+<td>
+${feed.toFixed(2)}
+</td>
+
+<td>
+${kg?
+(feed/kg).toFixed(2):
+"—"}
+</td>
+
+<td>
+${kg.toFixed(2)}
+</td>
+
+</tr>
+
+`;
+
+}
+
+html+=
+'</table>';
+
+document.getElementById(
+"reportArea"
+).innerHTML=html;
+
+}catch(e){
+
+document.getElementById(
+"reportArea"
+).innerHTML=
+'<div class="empty">Unable to load reports.</div>';
+
+}
+
+}
+
+document.getElementById(
+"dailyDate"
+).value=today();
+
+loadDashboard();
+
 </script>
+
 </body>
 </html>
