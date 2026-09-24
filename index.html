@@ -390,12 +390,43 @@ function newBatch(){
     </div>
   `);
 }
-function saveBatch(){
+async function saveBatch(){
 
-  alert("Batch saved successfully! 🐔");
+  const inputs = document.querySelectorAll("#batchForm input");
 
-  document.getElementById("batchForm").remove();
+  const company = inputs[0].value;
+  const batch = inputs[1].value;
+  const chicks = Number(inputs[2].value) || 0;
+  const chickRate = Number(inputs[3].value) || 0;
+  const date = inputs[4].value;
 
+  const response = await fetch(
+    SUPABASE_URL + "/rest/v1/flocks",
+    {
+      method: "POST",
+      headers: {
+        "apikey": SUPABASE_KEY,
+        "Authorization": "Bearer " + SUPABASE_KEY,
+        "Content-Type": "application/json",
+        "Prefer": "return=representation"
+      },
+      body: JSON.stringify({
+        farm_id: 1,
+        batch_name: batch,
+        bird_count: chicks,
+        placement_date: date,
+        status: "Active"
+      })
+    }
+  );
+
+  if(response.ok){
+    alert("Batch saved successfully! 🐔");
+    document.getElementById("batchForm").remove();
+  }else{
+    const error = await response.text();
+    alert("Save failed: " + error);
+  }
 }
 function dailyEntry(){
   alert("Daily Entry");
