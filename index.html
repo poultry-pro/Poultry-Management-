@@ -314,9 +314,89 @@ body{
 <script>
 
 function newBatch(){
-  alert("New Batch");
-}
 
+  document.body.insertAdjacentHTML("beforeend",`
+
+    <div id="batchForm"
+      style="
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.45);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+      z-index:9999;
+      ">
+
+      <div style="
+        background:white;
+        width:100%;
+        max-width:500px;
+        padding:25px;
+        border-radius:18px;
+        box-shadow:0 10px 40px rgba(0,0,0,.2);
+      ">
+
+        <h2 style="color:#123b2a;margin-bottom:8px;">
+          🐔 Create New Batch
+        </h2>
+
+        <p style="color:#777;margin-bottom:20px;">
+          Enter your batch details
+        </p>
+
+        <input placeholder="Company / Hatchery"
+          style="width:100%;padding:13px;margin-bottom:10px;border:1px solid #ddd;border-radius:8px;">
+
+        <input placeholder="Batch Number"
+          style="width:100%;padding:13px;margin-bottom:10px;border:1px solid #ddd;border-radius:8px;">
+
+        <input type="number" placeholder="Chicks Housed"
+          style="width:100%;padding:13px;margin-bottom:10px;border:1px solid #ddd;border-radius:8px;">
+
+        <input type="number" placeholder="Chick Rate ₹"
+          style="width:100%;padding:13px;margin-bottom:10px;border:1px solid #ddd;border-radius:8px;">
+
+        <input type="date"
+          style="width:100%;padding:13px;margin-bottom:18px;border:1px solid #ddd;border-radius:8px;">
+
+        <button onclick="saveBatch()"
+          style="
+          width:100%;
+          padding:14px;
+          border:0;
+          border-radius:9px;
+          background:#123b2a;
+          color:white;
+          font-size:15px;
+          ">
+          Save Batch
+        </button>
+
+        <button onclick="document.getElementById('batchForm').remove()"
+          style="
+          width:100%;
+          padding:12px;
+          margin-top:8px;
+          border:1px solid #ddd;
+          border-radius:9px;
+          background:white;
+          ">
+          Cancel
+        </button>
+
+      </div>
+    </div>
+  `);
+}
+function saveBatch(){
+
+  alert("Batch saved successfully! 🐔");
+
+  document.getElementById("batchForm").remove();
+
+}
 function dailyEntry(){
   alert("Daily Entry");
 }
